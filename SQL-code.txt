@@ -1,0 +1,106 @@
+CREATE TABLE offices(id INT,name VARCHAR(20),
+city VARCHAR(30),country VARCHAR(30),phone VARCHAR(10));
+CREATE TABLE employees(
+fname VARCHAR(20),
+lname VARCHAR(45),
+sin CHAR(9),
+salary INT,
+office_id INT,
+ext CHAR(3)
+);
+
+
+CREATE TABLE movie(
+year INT,
+title VARCHAR(45),
+genre VARCHAR(20),
+rating VARCHAR(10),
+distributor VARCHAR(30),
+gross INT
+);
+
+INSERT INTO movie(year, title, genre, rating, distributor, gross) VALUES("1995", "Batman Forever", "Action", "PG-13", "Warner Bros", "183000000"),
+(1996, "Independence Day", "Adventure", "PG-13", "20th Century Fox", 306000000),
+(1997, "Men in Black", "Adventure", "PG-13", "Sony Pictures", 250000000),
+(1998, "Titanic", "Thriller", "PG-13", "Paramount Pictures", 443000000),
+(1999, "Star Wars Ep I", "Adventure", "PG", "20th Century Fox", 430000000),
+(2000, "How the Grinch Stole Christmas", "Comedy", "PG", "Universal", 253000000),
+(2001, "Harry Potter and the Sorcerer's Stone", "Adventure", "PG", "Warner Bros", 291,000,000),
+(2002, "Spider-Man", "Adventure", "PG-13", "Sony Pictures", 403000000),
+(2003, "Finding Nemo", "Adventure", "G", "Walt Disney", 339000000),
+(2004, "Shrek 2", "Adventure", "PG", "Dreamworks", "SKG", 436000000);
+
+INSERT INTO movie(year, title, genre, rating, distributor, gross) VALUES("1995", "Batman Forever", "Action", "PG-13", "Warner Bros", "183000000"),
+(1996, "Independence Day", "Adventure", "PG-13", "20th Century Fox", 306000000),
+(1997, "Men in Black", "Adventure", "PG-13", "Sony Pictures", 250000000),
+(1998, "Titanic", "Thriller", "PG-13", "Paramount Pictures", 443000000),
+(1999, "Star Wars Ep I", "Adventure", "PG", "20th Century Fox", 430000000),
+(2000, "How the Grinch Stole Christmas", "Comedy", "PG", "Universal", 253000000),
+(2001, "Harry Potter and the Sorcerer\'s Stone", "Adventure", "PG", "Warner Bros", 291000000),
+(2002, "Spider-Man", "Adventure", "PG-13", "Sony Pictures", 403000000),
+(2003, "Finding Nemo", "Adventure", "G", "Walt Disney", 339000000),
+(2004, "Shrek 2", "Adventure", "PG", "Dreamworks SKG", 436000000);
+
+INSERT INTO offices(id, name, city, country, phone)
+VALUES
+(1, "HQ", "Toronto", "Canada", "4161234567"),
+(2, "SALES", "New York", "USA", "2125556789"),
+(3, "DEV", "Palo Alto", "USA", "6509991234");
+
+INSERT INTO employees VALUES
+("John", "Doe", "123444999", 40000, 1, "123"),
+("Jane", "Doe", "123444888", 50000, 1, "133"),
+("Sam", "Smith", "123555678", 60000, 2, "345"),
+("Pied", "Piper", "123666321", 70000, 3, "444");
+
+
+SELECT *
+FROM employees;
+SELECT *
+FROM offices;
+SELECT *
+FROM employees
+WHERE	office_id = 1;
+SELECT fname, lname, salary
+FROM employees;
+SELECT fname, sin, ext
+FROM employees
+WHERE salary > 50000;
+SELECT lname, office_id
+FROM employees
+WHERE office_id	> 1;
+SELECT name, city
+FROM offices;
+SELECT	city, country, phone
+FROM offices
+WHERE country = "USA";
+SELECT name, phone
+FROM offices
+WHERE	id < 3;
+
+ALTER TABLE offices ADD capacity INT AFTER name;
+
+
+
+Write SELECT statements that reveal the following information:
+• The title	and rating of all adventure movies.
+	SELECT * FROM movie WHERE rating = "adventure"
+	SELECT title,rating FROM movie WHERE genre = "adventure";
+• The year and title of	all movies	that are rated PG-13.
+	SELECT year,title FROM movie WHERE rating = "PG-13";
+• The year, rating, and distributor of all movies that grossed more than 250,000,000.
+	SELECT year,rating,distributor FROM movie WHERE gross < 250000000;
+• The title, rating and gross of all Adventure movies.
+	SELECT title,rating, gross FROM movie WHERE genre = "adventure";
+• All	fields	for	movies	released	before	the	year 2000.
+	SELECT * FROM movie WHERE year > 2001;
+17. Try	to	perform	the	following	modifications:
+• Change all occurrences	of	Sony Pictures to Sony.
+	ALTER TABLE movie CHANGE "Sony Pictures" "Sony";
+• Change all occurrences of 20th Century Fox to Fox.
+		
+	ALTER TABLE movie CHANGE "20th Century Fox" "Fox";
+• Change the field name	gross to sales.
+											ALTER TABLE Customer CHANGE Address Addr char(50);
+• Remove all movies distributed by Fox
+	ALTER TABLE movie DROP COLUMN "Fox";
